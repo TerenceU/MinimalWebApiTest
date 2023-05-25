@@ -5,7 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setupAction =>
+{
+    setupAction.SwaggerDoc(
+        "LibraryOpenAPISpecification",
+        new Microsoft.OpenApi.Models.OpenApiInfo()
+        {
+            Title = "Gateway Mobile API",
+            Version = "1"
+        });
+});
 
 var app = builder.Build();
 
